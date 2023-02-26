@@ -40,6 +40,7 @@ const GroupList = ({ name, history, match }) => {
             .catch((error) => {
                 console.log(error);
             })
+
     }, []);
 
     const result = () => {

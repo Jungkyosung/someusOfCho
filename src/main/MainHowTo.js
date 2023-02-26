@@ -1,6 +1,6 @@
 import Navigation from '../navigation/Navigation';
 import './main.css';
-import howto from 'C:/javascript/someus-app/src/img/mood_1.png';
+import howto from '../img/mood_1.png';
 
 const MainHowTo = ({ history }) => {
     return (

@@ -1,6 +1,6 @@
 import axios from 'axios';
 import './groupsharelisteach.css';
-import trueimage from 'C:/javascript/someus-app/src/img/group_half.png';
+import trueimage from '../img/group_half.png';
 
 
 const GroupShareListEach = ({ list }) => {
@@ -24,8 +24,8 @@ const GroupShareListEach = ({ list }) => {
         //     <div className='diarydate'>{ list.createdDt }</div>
         // </ div>
         <div className='group_eachdiary'>
-            <div className='group_diaryimg' />
-            <div className='group_diarydate'>2023.02.14</div>
+            {list.number === 0 ? <div className='group_diaryimg1' /> : <div className='group_diaryimg2' /> }
+            <div className='group_diarydate'>{list.createdDt}</div>
         </ div>
     );
 }

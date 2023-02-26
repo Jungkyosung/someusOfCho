@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { useState } from 'react';
 import './mydiaryeach.css'
-import sampleimage from 'C:/javascript/someus-app/src/img/sampleimage.jpg';
+import sampleimage from '../img/sampleimage.jpg';
 
 
 const MyDiaryEach = ({ list }) => {

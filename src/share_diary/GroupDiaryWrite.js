@@ -82,6 +82,7 @@ const GroupDiaryWrite = ({ history, match }) => {
     const toggleMoodActive = (e) => {
         e.preventDefault();
         setMoodActive(e.target.alt);
+        console.log(weatherActive);
     };
 
     const handlerOnChangeContents = (e) => {
@@ -149,7 +150,7 @@ const GroupDiaryWrite = ({ history, match }) => {
 
     const onSubmit = (e) => {
         e.preventDefault();
-
+        console.log(formData);
         axios({
             method: 'post',
             url: `http://localhost:8080/api/someus/share/${shareroomid}/write`,

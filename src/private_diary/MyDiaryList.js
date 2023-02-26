@@ -15,16 +15,16 @@ import Modal_Mydiary from "./Modal_Mydiary";
 
 const MyDiaryList = ({ match, history }) => {
 
-    const [ list, setList ] = useState([]);
-    const [ startDate, setStartDate ] = useState(new Date());
+    const [list, setList] = useState([]);
+    const [startDate, setStartDate] = useState(new Date());
     const { diaryId } = match.params;
-    const [ memberId, setMemberId ] = useState('');
-    const [ memberName, setMemberName ] = useState('');
-    const [ modalState, setModalState ] = useState([]);
-    const [ selectedDate, setSelectedDate ] = useState('');
+    const [memberId, setMemberId] = useState('');
+    const [memberName, setMemberName] = useState('');
+    const [modalState, setModalState] = useState([]);
+    const [selectedDate, setSelectedDate] = useState('');
 
     const closeModal = (index) => {
-        setModalState(prevState =>{
+        setModalState(prevState => {
             const updateArray = [...prevState];
             updateArray[index] = false;
             return updateArray;
@@ -38,14 +38,14 @@ const MyDiaryList = ({ match, history }) => {
         setMemberName(decode_token.name);
 
         let memberId = decode_token.sub;
-        
+
         axios.get(`http://localhost:8080/api/someus/private/page/${memberId}`,
             { headers: { 'Authorization': `Bearer ${sessionStorage.getItem('token')}` } })
             .then((response) => {
                 console.log(response);
                 setList(response.data.diaryList);
-                
-                for (let i = 0; i < list.length; i++){
+
+                for (let i = 0; i < list.length; i++) {
                     setModalState(prevState => {
                         const updateModalArray = [...prevState];
                         updateModalArray[i] = false;
@@ -86,7 +86,7 @@ const MyDiaryList = ({ match, history }) => {
         const month = ('0' + (date.getMonth() + 1)).slice(-2);
         const day = ('0' + date.getDate()).slice(-2);
         return `${year}-${month}-${day}`;
-      };
+    };
 
     // 날짜 변경 시 해당 날짜를 기준으로 목록이 리랜더링
     const handlerChangeDate = (date) => {
@@ -112,23 +112,23 @@ const MyDiaryList = ({ match, history }) => {
     };
 
     const handlerClickDetail = (index) => {
-        setModalState(prevState =>{
+        setModalState(prevState => {
             const updateArray = [...prevState];
             updateArray[index] = true;
             return updateArray;
         });
-       
+
     };
 
     const result = () => {
         return list && list.map((lst, index) => {
             return (
-            <div key={index} id={lst.diaryId}>           
-              {modalState[index] && <Modal_Mydiary match={match} closeModal={()=>closeModal(index)} id={lst.diaryId} list={lst}/>}
-              <button className="diaryeachbutton" type="button" value={lst.diaryId} onClick={() => handlerClickDetail(index)}>
-                <MyDiaryEach list={lst} />
-              </button>
-            </div>
+                <div key={index} id={lst.diaryId}>
+                    {modalState[index] && <Modal_Mydiary match={match} closeModal={() => closeModal(index)} id={lst.diaryId} list={lst} />}
+                    <button className="diaryeachbutton" type="button" value={lst.diaryId} onClick={() => handlerClickDetail(index)}>
+                        <MyDiaryEach list={lst} />
+                    </button>
+                </div>
             );
         });
     };
@@ -136,7 +136,7 @@ const MyDiaryList = ({ match, history }) => {
     return (
         <>
             <div>
-                <NaviDiary history={history}/>
+                <NaviDiary history={history} />
                 <div className='diarylist_background'
                     style={{ backgroundImage: `url('../img/bg_mylist.png')` }} >
                     {/* <img src={backimg} style={ { backgroundAttachment: 'fixed'}}/> */}
@@ -166,8 +166,8 @@ const MyDiaryList = ({ match, history }) => {
                         </div>
                         <div className='diary-container'>
                             <div>
-                                <p className="name_diary">{ memberName }의 일기</p>
-                                <p className='date'>{selectedDate.getMonth() + 1} {selectedDate.toLocaleString("en-US", { month: "long" })}</p>
+                                <p className="name_diary">{memberName}의 일기</p>
+                                <p className='date'>{startDate.getMonth() + 1} {startDate.toLocaleString("en-US", { month: "long" })}</p>
                             </div>
 
                             <button className='write' onClick={handlerClickWrite}>
@@ -176,7 +176,7 @@ const MyDiaryList = ({ match, history }) => {
                             </button>
 
                             <div className='diary'>
-                                <div className="diaryWrap">{ list && result() }</div>
+                                <div className="diaryWrap">{list && result()}</div>
                             </div>
                         </div>
                     </div>
